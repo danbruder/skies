@@ -261,14 +261,14 @@ impl ShiftPlan {
                 Err(e) => {
                     println!("✗ Failed to apply: {:#?}", e);
 
-                    println!("Reverting already applied shifts...");
-                    for applied_shift in applied.iter().rev() {
-                        println!("Reverting: {}", applied_shift.describe());
-                        match applied_shift.revert() {
-                            Ok(_) => println!("✓ Reverted successfully"),
-                            Err(e) => println!("✗ Failed to revert: {:#?}", e),
-                        }
-                    }
+                    // println!("Reverting already applied shifts...");
+                    // for applied_shift in applied.iter().rev() {
+                    //     println!("Reverting: {}", applied_shift.describe());
+                    //     match applied_shift.revert() {
+                    //         Ok(_) => println!("✓ Reverted successfully"),
+                    //         Err(e) => println!("✗ Failed to revert: {:#?}", e),
+                    //     }
+                    // }
 
                     return Err(e);
                 }
@@ -422,8 +422,8 @@ fn main() {
                 "console.log('Hello from main.js');".to_string(),
             )),
             Box::new(Cmd::new(
-                "npm".to_string(),
-                vec!["init".to_string(), "-y".to_string()],
+                "open".to_string(),
+                vec!["public/index.html".into()],
                 Some("project".to_string()),
                 None,
             )),
@@ -434,15 +434,15 @@ fn main() {
         println!("Failed to apply shift plan: {:#?}", e);
     }
 
-    let git_plan = GitHubClone::new(
-        "git@github.com:GyrosOfWar/s3-proxy.git".into(),
-        "s3-proxy".into(),
-        Some("main".into()),
-        None,
-        None,
-    );
+    // let git_plan = GitHubClone::new(
+    //     "git@github.com:GyrosOfWar/s3-proxy.git".into(),
+    //     "s3-proxy".into(),
+    //     None,
+    //     None,
+    //     None,
+    // );
 
-    if let Err(e) = git_plan.apply() {
-        println!("Failed to apply shift plan: {:#?}", e);
-    }
+    // if let Err(e) = git_plan.apply() {
+    //     println!("Failed to apply shift plan: {:#?}", e);
+    // }
 }
